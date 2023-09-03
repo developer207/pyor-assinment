@@ -1,0 +1,33 @@
+.searchWrapper{
+    position: relative;
+   
+    
+}
+
+input{
+    padding: .5rem 1rem;
+    width: 80%;
+    font-size: 20px;
+    margin: 1rem 0rem;
+    cursor: pointer;
+}
+
+.resultDiv{
+    position: absolute;
+    padding: .5rem 1rem;
+    top: 4.7rem;
+    width: 80%;
+    background-color: #dddddd;
+    z-index: 1;
+}
+
+.result{
+    padding: 1rem;
+    cursor: pointer;
+    margin: .3rem 0rem;
+}
+
+.result:hover{
+    background-color: rgb(62, 62, 62);
+    color:white
+}
