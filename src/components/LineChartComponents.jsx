@@ -69,14 +69,15 @@ const priceData=[
   ]
 ]
 const LineChartComponent = () => {
-  const [selectedCoin, setSelectedCoin] = useState('bitcoin');
+  const [selectedCoin, setSelectedCoin] = useState('tether');
   const [coinList,setCoinList]=useState([])
   const chartContainerRef = useRef(null);
   const dispatch = useDispatch()
   const {coin}=useSelector(store=>store)
   const [showSearchResult,setShowSearchResult]=useState(false);
+  const [searchKeword, setSearchKeword] = useState("");
 
-  console.log("coins ", coin.coins)
+  // console.log("coins ", coin.coins)
 
   useEffect(() => {
     dispatch(getCoinList())
@@ -85,7 +86,6 @@ const LineChartComponent = () => {
   
 
   useEffect(() => {
-    if(selectedCoin)
     dispatch(getHistoricalChart(selectedCoin))
   }, [selectedCoin]);
 
@@ -121,6 +121,9 @@ const LineChartComponent = () => {
 
   const handleCoinChange = (value) => {
     setSelectedCoin(value);
+    console.log("selected value",value)
+    setShowSearchResult(false)
+    setSearchKeword(value)
   };
 
   const handleSearch = (search) => {
@@ -134,20 +137,22 @@ const LineChartComponent = () => {
 }
 
   return (
-    <div>
+    <div className='container'>
      
       <div className='searchWrapper'>
         <input 
         placeholder='search coin...' 
+        value={searchKeword}
         onChange={(e)=>{
           handleSearch(e.target.value)
+          setSearchKeword(e.target.value)
         }} 
         onFocus={()=>{
          
             setShowSearchResult(true)}
           
         }
-        onBlur={()=>setShowSearchResult(false)}
+
         type="text" />
         {showSearchResult && <div className='resultDiv'>
           { coinList.map((coin)=><p 
